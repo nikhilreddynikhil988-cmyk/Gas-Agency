@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+.env
+client/node_modules
+client/build
+logs
+*.log
+coverage
+.git
