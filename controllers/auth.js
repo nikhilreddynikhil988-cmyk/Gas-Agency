@@ -30,6 +30,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     });
   } catch (err) {
     console.log(err);
+    // Do not return error, just log it. Registration should still succeed.
   }
 
 

@@ -14,30 +14,25 @@ connectDB();
 
 const app = express();
 
-// Body parser
 app.use(express.json());
 
-// Enable CORS
 app.use(cors());
 
-// Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Mount routers
 app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/bookings', require('./routes/bookings'));
 app.use('/api/v1/admin', require('./routes/admin'));
 
+app.use(require('./middleware/error'));
+
 const PORT = process.env.PORT || 5000;
 
-// Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
-  // Set static folder to the client build output
-  app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-  // Serve index.html for any unknown routes (client-side routing)
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
@@ -46,10 +41,7 @@ if (process.env.NODE_ENV === 'production') {
 const server = app.listen(PORT, () => {
   logger.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
 });
-
-// Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
   logger.error(`Error: ${err.message}`);
-  // Close server & exit process
   server.close(() => process.exit(1));
 });
