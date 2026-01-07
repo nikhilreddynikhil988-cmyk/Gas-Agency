@@ -22,7 +22,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="row">
+    <div className="row  shadow p-3 mb-5 bg-body rounded">
       <div className="col-md-6 mx-auto">
         <div className="card">
           <div className="card-header">Login</div>
@@ -51,7 +51,7 @@ const LoginPage = () => {
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary mt-2 w-100">
                 Login
               </button>
             </form>

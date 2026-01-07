@@ -45,9 +45,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
       <div className="container">
-        <Link className="navbar-brand" to="/">
-          Gas Agency
-        </Link>
+        <h1 className="navbar-brand"> Gas Agency </h1>
         <button
           className="navbar-toggler"
           type="button"

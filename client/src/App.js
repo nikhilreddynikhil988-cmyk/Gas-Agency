@@ -9,7 +9,6 @@ import DashboardPage from './pages/DashboardPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/routing/PrivateRoute';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -18,8 +17,8 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Navbar />
-        <main className="container mt-3">
-          <Routes>
+        <main className="container mt-3 mb-8 pb-5 ">
+          <Routes >
             <Route path="/" element={<HomePage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -33,7 +32,9 @@ const App = () => {
             />
           </Routes>
         </main>
-        <Footer />
+        <div className="mt-4 ">
+          <Footer />
+        </div>
       </Router>
     </AuthProvider>
   );
