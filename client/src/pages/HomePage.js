@@ -1,24 +1,38 @@
-import React from 'react';
+import React from "react";
 
 const HomePage = () => {
   return (
-    <div className="jumbotron">
-      <h1 className="display-4">Welcome to the Gas Agency</h1>
-      <p className="lead">
-        This is a simple and easy way to book your gas cylinders online.
-      </p>
-      <hr className="my-4" />
-      <p>
-        You can register as a new user or login if you already have an account.
-      </p>
-      <p className="lead">
-        <a className="btn btn-primary btn-lg" href="/register" role="button">
-          Register
-        </a>
-        <a className="btn btn-secondary btn-lg ml-2" href="/login" role="button">
-          Login
-        </a>
-      </p>
+    <div
+      className="d-flex align-items-center justify-content-center"
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #1d2671, #c33764)",
+      }}
+    >
+      <div className="card shadow-lg p-5 text-center" style={{ maxWidth: "600px" }}>
+        <h1 className="display-5 fw-bold mb-3">
+          🔥 Welcome to Gas Agency
+        </h1>
+
+        <p className="lead text-muted">
+          Book your gas cylinders easily and securely from the comfort of your home.
+        </p>
+
+        <hr className="my-4" />
+
+        <p className="mb-4">
+          New here? Register now. Already a customer? Login to manage your bookings.
+        </p>
+
+        <div className="d-flex justify-content-center gap-3">
+          <a href="/register" className="btn btn-primary btn-lg px-4">
+            Register
+          </a>
+          <a href="/login" className="btn btn-outline-secondary btn-lg px-4">
+            Login
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
