@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 const styles = {
     container: {
         minHeight: '100vh',
@@ -19,9 +20,12 @@ const UserHome = () => {
             <div className="card shadow-lg p-4" style={styles.card}>
                 <h3 className="text-center mb-3 fw-bold">🔐 User Home</h3>
                 <p className="text-center text-muted mb-4">
-                    Welcome to the user dashboard
+                    Welcome to the Gas Agency we are here to serve you
                 </p>
                 <p>The gas agency is a company that provides gas cylinders to customers.</p>
+                <Link className="btn btn-primary btn-lg" to="/dashboard" role="button">
+                    Go to Dashboard
+                </Link>
             </div>
         </div>
     );
