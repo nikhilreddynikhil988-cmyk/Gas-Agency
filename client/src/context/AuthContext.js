@@ -30,14 +30,21 @@ const AuthProvider = ({ children }) => {
     const res = await authService.login(email, password);
     const userRes = await authService.getMe(res.token);
     setUser(userRes.data.data);
-    return res;
+    return userRes.data.data;
   };
 
-  const register = async (name, email, password) => {
-    const res = await authService.register(name, email, password);
+  const register = async (name, email, password, role) => {
+    const existing = JSON.parse(localStorage.getItem('user'));
+    const res = await authService.register(name, email, password, role);
     const userRes = await authService.getMe(res.token);
-    setUser(userRes.data.data);
-    return res;
+
+    // If no existing logged-in user, set the authenticated user (normal registration flow).
+    // If an admin is creating another user, do not overwrite the current session.
+    if (!existing) {
+      setUser(userRes.data.data);
+    }
+
+    return userRes.data.data;
   };
 
   const logout = () => {

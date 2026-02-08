@@ -14,7 +14,7 @@ const PrivateRoute = ({ component: Component, roles }) => {
   }
 
   if (roles && !roles.includes(user.role)) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/home" />;
   }
 
   return <Component />;

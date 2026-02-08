@@ -7,10 +7,12 @@ const AdminDashboardPage = () => {
   const [notices, setNotices] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
+ useEffect(() => {
+    document.title = 'Admin Dashboard - Gas Agency';
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {

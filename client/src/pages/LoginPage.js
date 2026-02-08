@@ -13,8 +13,12 @@ const LoginPage = () => {
     e.preventDefault();
     setError("");
     try {
-      await login(email, password);
-      navigate("/dashboard");
+      const user = await login(email, password);
+      if (user?.role === 'admin') {
+        navigate('/admin-home');
+      } else {
+        navigate('/user-home');
+      }
     } catch (err) {
       setError(err.response?.data?.error || "Login failed");
       console.log(err);

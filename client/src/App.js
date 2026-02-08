@@ -7,9 +7,12 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
+import AdminWelcome from './pages/AdminWelcome';
+import UserHome from './pages/UserHome';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/routing/PrivateRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './App.css';
 
 const App = () => {
@@ -23,11 +26,19 @@ const App = () => {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route
+              path="/user-home"
+              element={<PrivateRoute component={UserHome} />}
+            />
+            <Route
               path="/dashboard"
               element={<PrivateRoute component={DashboardPage} />}
             />
             <Route
-              path="/admin"
+              path="/admin-home"
+              element={<PrivateRoute component={AdminWelcome} roles={['admin']} />}
+            />
+            <Route
+              path="/admin-dashboard"
               element={<PrivateRoute component={AdminDashboardPage} roles={['admin']} />}
             />
           </Routes>

@@ -3,18 +3,10 @@ const asyncHandler = require('../middleware/async');
 const User = require('../models/User');
 const Booking = require('../models/Booking');
 const Notice = require('../models/Notice');
-
-// @desc      Get all users
-// @route     GET /api/v1/admin/users
-// @access    Private/Admin
 exports.getUsers = asyncHandler(async (req, res, next) => {
   const users = await User.find();
   res.status(200).json({ success: true, count: users.length, data: users });
 });
-
-// @desc      Update user
-// @route     PUT /api/v1/admin/users/:id
-// @access    Private/Admin
 exports.updateUser = asyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,

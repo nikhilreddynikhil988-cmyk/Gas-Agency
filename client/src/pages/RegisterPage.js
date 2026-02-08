@@ -7,15 +7,27 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { register } = useContext(AuthContext);
+  const [success, setSuccess] = useState("");
+  const [role, setRole] = useState('user');
+  const { register, user: currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await register(name, email, password);
-      navigate("/dashboard");
+      await register(name, email, password, role);
+      // If an admin created this user, stay on page and show success
+      if (currentUser && currentUser.role === 'admin') {
+        setSuccess('User created successfully');
+        setName('');
+        setEmail('');
+        setPassword('');
+        setRole('user');
+        setTimeout(() => setSuccess(''), 3000);
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       setError(err.response?.data?.error || "Registration failed");
       console.log(err);
@@ -37,6 +49,7 @@ const RegisterPage = () => {
         </p>
 
         {error && <div className="alert alert-danger">{error}</div>}
+        {success && <div className="alert alert-success">{success}</div>}
 
         <form onSubmit={onSubmit}>
           <div className="mb-3">
@@ -74,6 +87,22 @@ const RegisterPage = () => {
               required
             />
           </div>
+
+          {/* Admins can create other admins */}
+          {currentUser && currentUser.role === 'admin' && (
+            <div className="mb-3 form-check">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="isAdmin"
+                checked={role === 'admin'}
+                onChange={(e) => setRole(e.target.checked ? 'admin' : 'user')}
+              />
+              <label className="form-check-label" htmlFor="isAdmin">
+                Create as admin
+              </label>
+            </div>
+          )}
 
           <button
             type="submit"

@@ -6,29 +6,50 @@ const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
 
   const authLinks = (
-    <ul className="navbar-nav ml-auto">
-      <li className="nav-item">
-        <Link className="nav-link" to="/dashboard">
-          Dashboard
-        </Link>
-      </li>
-      {user && user.role === 'admin' && (
-        <li className="nav-item">
-          <Link className="nav-link" to="/admin">
-            Admin
-          </Link>
-        </li>
+    <ul className="navbar-nav ms-auto">
+      {user?.role === 'admin' ? (
+        <>
+          <li className="nav-item">
+            <Link className="nav-link" to="/admin-home">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/admin-dashboard">
+              Admin Dashboard
+            </Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li className="nav-item">
+            <Link className="nav-link" to="/user-home">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/dashboard">
+              Dashboard
+            </Link>
+          </li>
+        </>
       )}
+
       <li className="nav-item">
-        <a onClick={logout} href="#!" className="nav-link">
-          <i className="fas fa-sign-out-alt"></i> <span className="hide-sm">Logout</span>
-        </a>
+        <button
+          className="nav-link btn btn-link"
+          onClick={logout}
+          style={{ textDecoration: 'none' }}
+        >
+          <i className="fas fa-sign-out-alt"></i>{' '}
+          <span className="hide-sm">Logout</span>
+        </button>
       </li>
     </ul>
   );
 
   const guestLinks = (
-    <ul className="navbar-nav ml-auto">
+    <ul className="navbar-nav ms-auto">
       <li className="nav-item">
         <Link className="nav-link" to="/register">
           Register
@@ -45,12 +66,15 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
       <div className="container">
-        <h1 className="navbar-brand"> Gas Agency </h1>
+        <p className="navbar-brand">
+          Gas Agency
+        </p>
+
         <button
           className="navbar-toggler"
           type="button"
-          data-toggle="collapse"
-          data-target="#mobile-nav"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobile-nav"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
